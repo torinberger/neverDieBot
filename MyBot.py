@@ -32,17 +32,24 @@ def largest(planets): # Find largest planets
 
 i = 1
 
+ships = []
+
 while True: # Loops each turn
 
     game_map = game.update_map() # Get updated version of map
     command_queue = [] # Commands to execute this turn
 
     for ship in game_map.get_me().all_ships():
-        planet = largest(game_map.all_planets())
-        planet = planet[len(planet)-i]
+        planets = largest(game_map.all_planets())
+        planet = planets[len(planets)-i]
+        logging.info(len(planets))
+
+        if(ship.docking_status != ship.docking_status.UNDOCKED):
+            continue
 
         if(planet.owner == None or planet.owner == game_map.get_me()):
             if ship.can_dock(planet):
+                ships.append(ship)
                 command_queue.append(ship.dock(planet))
             else:
                 navigate_command = ship.navigate(
