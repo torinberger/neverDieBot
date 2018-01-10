@@ -1,0 +1,2 @@
+# neverDieBot
+A halite bot
