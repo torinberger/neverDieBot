@@ -27,7 +27,7 @@ def largest(planets): # Find largest planets
             maxr = planet.radius
             curpl.append(planet)
 
-    logging.info("Largest planets: "+str(curpl)) # Log data
+    logging.info("Largest planets: "+str(curpl[0].x)+", "+str(curpl[0].y)) # Log data
     return curpl # Return arrays of largest planets
 
 i = 1
@@ -56,7 +56,8 @@ while True: # Loops each turn
                     ship.closest_point_to(planet),
                     game_map,
                     speed=int(hlt.constants.MAX_SPEED),
-                    ignore_ships=False)
+                    ignore_ships=False,
+                    max_corrections=180)
                 if navigate_command:
                     command_queue.append(navigate_command)
         else:
